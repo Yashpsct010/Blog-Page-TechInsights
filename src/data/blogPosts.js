@@ -15,7 +15,7 @@ export const blogPosts = [
     date: "2024-03-15",
     readTime: "5 min",
     category: "Artificial Intelligence",
-    image: "/src/assets/blog-images/ai-development.jpg",
+    image: "https://blogs.debutinfotech.com/wp-content/uploads/2024/04/Artificial-Intelligence-Development.jpg",
     imageAlt: "AI and machine learning concept visualization"
   },
   {
@@ -34,7 +34,7 @@ export const blogPosts = [
     date: "2024-03-12",
     readTime: "8 min",
     category: "Web Development",
-    image: "/src/assets/blog-images/web-performance.jpg",
+    image: "https://bugfender.com/wp-content/uploads/2021/02/performance-scaled.jpg",
     imageAlt: "Web performance metrics dashboard"
   },
   {
@@ -53,7 +53,7 @@ export const blogPosts = [
     date: "2024-03-10",
     readTime: "6 min",
     category: "Architecture",
-    image: "/src/assets/blog-images/microservices.jpg",
+    image: "https://miro.medium.com/v2/resize:fit:1400/1*1hBwhZ--xEVY35z5owT1Qw.jpeg",
     imageAlt: "Microservices architecture diagram"
   },
   {
@@ -72,7 +72,7 @@ export const blogPosts = [
     date: "2024-03-08",
     readTime: "7 min",
     category: "Web Technologies",
-    image: "/src/assets/blog-images/webassembly.jpg",
+    image: "https://sapphireventures.com/wp-content/uploads/2022/10/WebAssembly_Infra_marketmapfeaturedimage-1.png",
     imageAlt: "WebAssembly code visualization"
   },
   {
@@ -91,7 +91,7 @@ export const blogPosts = [
     date: "2024-03-05",
     readTime: "9 min",
     category: "Security",
-    image: "/src/assets/blog-images/security.jpg",
+    image: "https://dxc.scene7.com/is/image/dxc/AdobeStock_649801194?$landscape_desktop$",
     imageAlt: "Cybersecurity concept illustration"
   }
 ];
