@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { sampleArticles } from '../data/sampleData';
 import ImageWithFallback from '../components/ImageWithFallback';
 
@@ -38,7 +39,12 @@ const BlogPost = () => {
   if (error) {
     return (
       <div className="container mx-auto px-4 py-12">
-        <div className="max-w-3xl mx-auto text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-3xl mx-auto text-center"
+        >
           <h1 className="text-2xl font-bold text-red-600 dark:text-red-400 mb-4">{error}</h1>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             The article you are looking for doesn&apos;t exist or has been removed.
@@ -49,7 +55,7 @@ const BlogPost = () => {
           >
             Back to Homepage
           </Link>
-        </div>
+        </motion.div>
       </div>
     );
   }
@@ -59,17 +65,28 @@ const BlogPost = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-3xl mx-auto">
-        <Link
-          to="/"
-          className="inline-flex items-center text-blue-600 dark:text-blue-400 mb-6 hover:underline"
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-          </svg>
-          Back to Articles
-        </Link>
+          <Link
+            to="/"
+            className="inline-flex items-center text-blue-600 dark:text-blue-400 mb-6 hover:underline"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+            </svg>
+            Back to Articles
+          </Link>
+        </motion.div>
 
-        <article className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+        <motion.article
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
+        >
           <div className="relative h-64 md:h-96">
             <ImageWithFallback
               src={post.image}
@@ -78,7 +95,12 @@ const BlogPost = () => {
             />
           </div>
 
-          <div className="p-6 md:p-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="p-6 md:p-8"
+          >
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               {post.title}
             </h1>
@@ -99,28 +121,45 @@ const BlogPost = () => {
 
             <div className="prose dark:prose-invert max-w-none">
               {post.content.split('\n').map((paragraph, index) => (
-                <p key={index} className="mb-4 text-gray-700 dark:text-gray-300">
+                <motion.p
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
+                  className="mb-4 text-gray-700 dark:text-gray-300"
+                >
                   {paragraph.trim()}
-                </p>
+                </motion.p>
               ))}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700"
+            >
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Tags</h3>
               <div className="flex flex-wrap gap-2">
-                {post.tags.map(tag => (
-                  <Link
+                {post.tags.map((tag, index) => (
+                  <motion.div
                     key={tag}
-                    to={`/search?q=${tag}`}
-                    className="inline-block px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.2, delay: 0.5 + index * 0.05 }}
                   >
-                    {tag}
-                  </Link>
+                    <Link
+                      to={`/search?q=${tag}`}
+                      className="inline-block px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    >
+                      {tag}
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
-            </div>
-          </div>
-        </article>
+            </motion.div>
+          </motion.div>
+        </motion.article>
       </div>
     </div>
   );

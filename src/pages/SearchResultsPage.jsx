@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { sampleArticles } from '../data/sampleData';
 
 const SearchResultsPage = () => {
@@ -38,13 +39,19 @@ const SearchResultsPage = () => {
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="max-w-4xl mx-auto">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                    Search Results
-                </h1>
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                        Search Results
+                    </h1>
 
-                <p className="text-gray-600 dark:text-gray-300 mb-8">
-                    {query ? `Showing results for "${query}"` : 'Enter a search term to find articles'}
-                </p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-8">
+                        {query ? `Showing results for "${query}"` : 'Enter a search term to find articles'}
+                    </p>
+                </motion.div>
 
                 {isLoading ? (
                     <div className="flex justify-center py-10">
@@ -53,10 +60,18 @@ const SearchResultsPage = () => {
                 ) : (
                     <>
                         {results.length > 0 ? (
-                            <div className="space-y-6">
-                                {results.map((article) => (
-                                    <div
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.5 }}
+                                className="space-y-6"
+                            >
+                                {results.map((article, index) => (
+                                    <motion.div
                                         key={article.id}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.4, delay: index * 0.1 }}
                                         className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200"
                                     >
                                         <div className="p-6">
@@ -88,11 +103,16 @@ const SearchResultsPage = () => {
                                                 Read more →
                                             </Link>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 ))}
-                            </div>
+                            </motion.div>
                         ) : (
-                            <div className="text-center py-10">
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.4 }}
+                                className="text-center py-10"
+                            >
                                 {query ? (
                                     <div className="space-y-3">
                                         <p className="text-xl text-gray-700 dark:text-gray-300">No results found for &quot;{query}&quot;</p>
@@ -101,7 +121,7 @@ const SearchResultsPage = () => {
                                 ) : (
                                     <p className="text-xl text-gray-700 dark:text-gray-300">Enter a search term to find articles</p>
                                 )}
-                            </div>
+                            </motion.div>
                         )}
                     </>
                 )}
